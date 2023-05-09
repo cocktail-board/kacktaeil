@@ -4,5 +4,5 @@ register = Blueprint('register', __name__)
 
 
 @register.route('/register')
-def register_fun():
-    return render_template('index.html')
+def register_page():
+    return render_template('/user/index.html')
