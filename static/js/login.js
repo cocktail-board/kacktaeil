@@ -23,7 +23,7 @@ function login() {
       }
       if (check === "success") {
         alert("로그인 성공");
-        window.location.replace("/board");
+        window.location.replace("/index");
       }
     },
     error: function (req, status, error) {

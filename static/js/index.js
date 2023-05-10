@@ -8,3 +8,4 @@ signUpBtn.addEventListener("click", () => {
 signInBtn.addEventListener("click", () => {
   container.classList.remove("right-panel-active");
 });
+

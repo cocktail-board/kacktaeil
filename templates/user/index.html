@@ -26,21 +26,60 @@
       href="{{url_for('static', filename='/css/index.css')}}"
     />
 
-    <script></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 화면 샘플 - Bootstrap</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/index.css')}}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      alert('{{message}}')
+    </script>
   </head>
 
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="sign-up-container">
-          <form>
-            <h1>회원가입</h1>
-            <span>회원가입 하세요!</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button class="form_btn">회원가입</button>
-          </form>
+<body>  
+  <div class="wrapper">
+    <div class="container">
+      <div class="sign-up-container">
+        <form action="/api/signup" method="post">
+          <h1>회원가입</h1>
+          <span>회원가입 하세요!</span>
+          <input type="text" placeholder="Name" name="name">
+          <input type="email" placeholder="Email" name="email">
+          <input type="password" placeholder="Password" name="password">
+          <button class="form_btn">회원가입</button>
+        </form>
+      </div>
+      <div class="sign-in-container">
+        <form>
+          <h1>Sign In</h1>
+          <div class="social-links">
+            <div>
+              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            </div>
+            <div>
+              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+            <div>
+              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <span>or use your account</span>
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+          <button class="form_btn">Sign In</button>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay-left">
+          <h1>Welcome Back</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button id="signIn" class="overlay_btn">Sign In</button>
         </div>
         <div class="sign-in-container">
           <form
