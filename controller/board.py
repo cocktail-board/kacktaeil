@@ -4,7 +4,7 @@ board = Blueprint('board', __name__)
 
 @board.route('/board')
 def board_list():
-    return "게시판 보기"
+    return render_template('user/main_page/index.html')
 
 @board.route('/board/save')
 def board_create_get():

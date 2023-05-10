@@ -10,18 +10,22 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='/css/index.css')}}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      alert('{{message}}')
+    </script>
   </head>
 
 <body>  
   <div class="wrapper">
     <div class="container">
       <div class="sign-up-container">
-        <form>
+        <form action="/api/signup" method="post">
           <h1>회원가입</h1>
           <span>회원가입 하세요!</span>
-          <input type="text" placeholder="Name">
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
+          <input type="text" placeholder="Name" name="name">
+          <input type="email" placeholder="Email" name="email">
+          <input type="password" placeholder="Password" name="password">
           <button class="form_btn">회원가입</button>
         </form>
       </div>
