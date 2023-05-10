@@ -2,9 +2,9 @@ from flask import Blueprint, render_template
 
 board = Blueprint('board', __name__)
 
-@board.route('/board')
+@board.route('/board', methods=["GET"])
 def board_list():
-    return "게시판 보기"
+    return render_template('/user/board.html')
 
 @board.route('/board/save')
 def board_create_get():

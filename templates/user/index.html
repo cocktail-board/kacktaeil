@@ -1,69 +1,111 @@
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 화면 샘플 - Bootstrap</title>
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- ajax cookie -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+      integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='/css/index.css')}}"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입 화면 샘플 - Bootstrap</title>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/index.css')}}"/>
+    <script></script>
   </head>
 
-<body>  
-  <div class="wrapper">
-    <div class="container">
-      <div class="sign-up-container">
-        <form>
-          <h1>회원가입</h1>
-          <span>회원가입 하세요!</span>
-          <input type="text" placeholder="Name">
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <button class="form_btn">회원가입</button>
-        </form>
-      </div>
-      <div class="sign-in-container">
-        <form>
-          <h1>Sign In</h1>
-          <div class="social-links">
-            <div>
-              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            </div>
-            <div>
-              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-            <div>
-              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            </div>
-          </div>
-          <span>or use your account</span>
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <button class="form_btn">Sign In</button>
-        </form>
-      </div>
-      <div class="overlay-container">
-        <div class="overlay-left">
-          <h1>Welcome Back</h1>
-          <p>To keep connected with us please login with your personal info</p>
-          <button id="signIn" class="overlay_btn">Sign In</button>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="sign-up-container">
+          <form>
+            <h1>회원가입</h1>
+            <span>회원가입 하세요!</span>
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button class="form_btn">회원가입</button>
+          </form>
         </div>
-        <div class="overlay-right">
-          <h1>Hello, Friend</h1>
-          <p>Enter your personal details and start journey with us</p>
-          <button id="signUp" class="overlay_btn">Sign Up</button>
+        <div class="sign-in-container">
+          <form
+            method="POST"
+            id="login-form"
+            name="login-form"
+            action="/api/login"
+          >
+            <h1>로그인</h1>
+            <div class="social-links">
+              <div>
+                <a href="#"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
+              </div>
+              <div>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              </div>
+              <div>
+                <a href="#"
+                  ><i class="fa fa-linkedin" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <span>or use your account</span>
+            <input
+              type="email"
+              name="login-email"
+              id="login-email"
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              name="login-password"
+              id="login-password"
+              placeholder="Password"
+            />
+            <button class="form_btn" onclick="login()">로그인</button>
+          </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay-left">
+            <h1>Welcome Back</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
+            <button id="signIn" class="overlay_btn">Sign In</button>
+          </div>
+          <div class="overlay-right">
+            <h1>Hello, Friend</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button id="signUp" class="overlay_btn">Sign Up</button>
+          </div>
         </div>
       </div>
     </div>
-  </div> 
-  
-  
-  
-  <script type="text/javascript" src="{{url_for('static', filename='/js/index.js')}}"></script>
- 
-</body>
 
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='/js/index.js')}}"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='/js/login.js')}}"
+    ></script>
+  </body>
 </html>

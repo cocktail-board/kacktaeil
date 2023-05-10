@@ -11,4 +11,6 @@ app.register_blueprint(board.board, url_prefix="/")
 app.register_blueprint(login.login, url_prefix="/")
 
 if __name__ == '__main__':
+    app.secret_key = "ewf*(#JFnowef*@(0F|QW{F|}))"
+    
     app.run(host='0.0.0.0', port='5001')
