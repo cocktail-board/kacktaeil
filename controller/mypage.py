@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, session
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from bson import json_util
@@ -14,7 +14,31 @@ my_page = Blueprint('my_page', __name__)
 
 @my_page.route("/mypage")
 def my_page_route():
-    return render_template('/user/main_page/mypage.html')
+    result = list()
+    kacktail_list = list(db.board.find({},{'_id':False}))
+
+    count = 1
+
+    session_id = session['id']
+
+    find_user = db.users.find_one({"_id":ObjectId(session_id)})
+
+    name = find_user['name']
+
+    for a in kacktail_list:
+        if a['author'] == name:
+            doc = {
+                'title': a['title'],
+                'text': a['text'],
+                'images': a['images'],
+                'author': a['author'],
+                'count': count,
+            }
+            count = count+1
+            result.append(doc)
+
+
+    return render_template('/user/main_page/mypage.html', kacktail_list = result)
 
 @my_page.route("/api/mypage", methods=["POST"])
 def post_mypage():

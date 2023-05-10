@@ -1,11 +1,15 @@
 from flask import Blueprint, render_template, request, current_app, session
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient  
+from bson.objectid import ObjectId
+import certifi
 import datetime as dt   
+
+ca = certifi.where()
 
 board = Blueprint('board', __name__)
 
-client = MongoClient('mongodb+srv://gmakin36:vcAhbtS2O3CsZFxC@cocktail-cluster.zgihll4.mongodb.net/?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://gmakin36:vcAhbtS2O3CsZFxC@cocktail-cluster.zgihll4.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.kacktail
 
 @board.route('/board')
@@ -41,11 +45,19 @@ def board_create_post():
 
     img.save(current_app.static_folder+'/img/'+img.filename)
 
+    session_id = session['id']
+
+    find_user = db.users.find_one({"_id":ObjectId(session_id)})
+
+    author = str(find_user['name'])
+
+    print(author)
+
     doc = {
         'title': title,
         'text': text,
         'images': img_url,
-        'author': '', #작성자는 로그인 기능 완료후 수정.
+        'author': author, 
         'create_day': createday,
         'update_day': ''
     }

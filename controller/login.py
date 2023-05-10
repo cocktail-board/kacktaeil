@@ -21,8 +21,8 @@ def postLogin():
         return jsonify({"result":"failed"})
     
     session['id'] = str(find_user['_id'])
-    print(find_user)
-    print(session['id'])
+    # print(find_user)
+    # print(session['id'])
     if find_user:
         return jsonify({"result":"success"})
 

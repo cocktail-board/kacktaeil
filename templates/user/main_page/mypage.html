@@ -7,19 +7,74 @@
     <!-- Jquery -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Favicon-->
+        <link
+        rel="icon"
+        type="image/x-icon"
+        href="{{url_for('static', filename='/assets/favicon.ico')}}"
+      />
+      <!-- Font Awesome icons (free version)-->
+      <script
+        src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+        crossorigin="anonymous"
+      ></script>
+      <!-- Google fonts-->
+      <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link
+        href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+        rel="stylesheet"
+        type="text/css"
+      />
+    
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='/css/styles_main.css')}}"
+    />
   </head>
   <style>
     .hidden {
       display: none;
     }
   </style>
-  <body>
+  <body id="page-top">
     <div id="hidden">
       <span name="session-id" id="session-id">{{session['id']}}</span>
     </div>
     <main>
       <div id="userinfo-container"></div>
-      <div id="boardinfo-container"></div>
+      
+      <div class="row">
+        {% for a in kacktail_list %}
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="portfolio-item">
+              <a
+                class="portfolio-link"
+                data-bs-toggle="modal"
+                href="#portfolioModal{{a['count']}}"
+              >
+                <div class="portfolio-hover">
+                  <div class="portfolio-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img
+                  class="img-fluid"
+                  src="{{url_for('static', filename=a['images'])}}"
+                  alt="..."
+                />
+              </a>
+              <div class="portfolio-caption">
+                <div class="portfolio-caption-heading">{{a['title']}}</div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      
     </main>
 
     <script
