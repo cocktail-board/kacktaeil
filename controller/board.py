@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, current_app
+from flask import Blueprint, render_template, request, current_app, session
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient  
 import datetime as dt   
