@@ -7,29 +7,29 @@
     <!-- Jquery -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- Favicon-->
-        <link
-        rel="icon"
-        type="image/x-icon"
-        href="{{url_for('static', filename='/assets/favicon.ico')}}"
-      />
-      <!-- Font Awesome icons (free version)-->
-      <script
-        src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-        crossorigin="anonymous"
-      ></script>
-      <!-- Google fonts-->
-      <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-        rel="stylesheet"
-        type="text/css"
-      />
-      <link
-        href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
-        rel="stylesheet"
-        type="text/css"
-      />
-    
+    <!-- Favicon-->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='/assets/favicon.ico')}}"
+    />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+
     <!-- Core theme CSS (includes Bootstrap)-->
     <link
       rel="stylesheet"
@@ -45,12 +45,18 @@
     <div id="hidden">
       <span name="session-id" id="session-id">{{session['id']}}</span>
     </div>
-    <main>
-      <div id="userinfo-container"></div>
-      
-      <div class="row">
-        {% for a in kacktail_list %}
-        <div class="col-lg-4 col-sm-6 mb-4">
+    <div id="userinfo-container"></div>
+    <section class="page-section bg-light" id="portfolio">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-heading text-uppercase">게시판</h2>
+          <h3 class="section-subheading text-muted">
+            내가 쓴 게시글을 확인하세요!
+          </h3>
+        </div>
+        <div class="row">
+          {% for a in kacktail_list %}
+          <div class="col-lg-4 col-sm-6 mb-4">
             <div class="portfolio-item">
               <a
                 class="portfolio-link"
@@ -74,9 +80,63 @@
             </div>
           </div>
           {% endfor %}
-      
-    </main>
+        </div>
+      </div>
+    </section>
 
+    <footer></footer>
+    <!-- 캌테일 선택시 -->
+    <!-- Portfolio item 1 modal popup-->
+    {% for a in kacktail_list %}
+    <div
+      class="portfolio-modal modal fade"
+      id="portfolioModal{{a['count']}}"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-bs-dismiss="modal">
+            <img
+              src="{{url_for('static', filename='assets/img/close-icon.svg')}}"
+              alt="Close modal"
+            />
+          </div>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <div class="modal-body">
+                  <!-- Project details-->
+                  <h2 class="text-uppercase">{{a['title']}}</h2>
+                  <img
+                    class="img-fluid d-block mx-auto"
+                    src="{{url_for('static', filename=a['images'])}}"
+                    alt="..."
+                  />
+                  <p>{{a['text']}}</p>
+                  <ul class="list-inline">
+                    <li>
+                      <strong>작성자 : </strong>
+                      {{a['author']}}
+                    </li>
+                  </ul>
+                  <button
+                    class="btn btn-primary btn-xl text-uppercase"
+                    data-bs-dismiss="modal"
+                    type="button"
+                  >
+                    <i class="fas fa-xmark me-1"></i>
+                    게시글 닫기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
     <script
       type="text/javascript"
       src="{{url_for('static', filename='/js/mypage.js')}}"

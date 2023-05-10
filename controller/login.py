@@ -26,6 +26,8 @@ def postLogin():
     if find_user:
         return jsonify({"result":"success"})
 
-@login.route("/loginout", methods=["POST"])
+@login.route("/api/logout", methods=["POST"])
 def login_route():
-    return "로그인아웃 화면"
+    session.clear()
+    message = '로그아웃 되었습니다.'
+    return render_template('/user/index.html', message = message)
