@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, current_app, session
+from flask import Blueprint, render_template, request, current_app, session,redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient  
 from bson.objectid import ObjectId
@@ -51,14 +51,14 @@ def board_create_post():
 
     author = str(find_user['name'])
 
-    print(author)
+    # print(author)
 
     doc = {
         'title': title,
         'text': text,
         'images': img_url,
         'author': author, 
-        'create_day': createday,
+        'create_day': str(createday),
         'update_day': ''
     }
 
@@ -81,13 +81,60 @@ def board_create_post():
         result.append(doc)
     return render_template('user/main_page/index.html',kacktail_list = result)
 
-@board.route('/board/delete', methods=["POST"])
-def board_delete_get():
-    return "게시판 삭제"
 
+# 수정 버튼 누를시
 @board.route('/board/update', methods=["POST"])
 def board_update_post():
-    return "게시판 수정"
-@board.route('/board/update')
-def board_update_get():
-    return "게시판 수정 화면"
+    board_title = request.form['board-title']
+    board_date = request.form['board-date']
+
+    result = list()
+    kacktail_list = db.board.find_one({"title":board_title, "create_day":board_date})
+    
+    doc = {
+        'id':str(kacktail_list['_id']),
+        'title' : kacktail_list['title'],
+        'text' : kacktail_list['text'],
+        'images' : kacktail_list['images'],
+        'author': kacktail_list['author']
+    }
+    result.append(doc)
+
+    return render_template('user/main_page/board_update.html', kacktail_list = result)
+
+
+# 수정 완료 누를시
+@board.route('/board/update/finish', methods=["POST"])
+def board_update_finish():
+    id = request.form['board-id']
+    title = request.form['title']
+    text = request.form['text']
+    img = request.files['img']
+    img_url = '/img/'+img.filename
+    update_date = dt.datetime.now().replace(microsecond=0)
+
+    img.save(current_app.static_folder+'/img/'+img.filename)
+
+    find_board = db.board.find_one({"_id":ObjectId(id)})
+
+    author = str(find_board['author'])
+
+    print(find_board)
+
+    doc = {
+        'title': title,
+        'text': text,
+        'images': img_url,
+        'author': author, 
+        'update_day': update_date,
+    }
+    
+
+    db.board.update_one({"_id":ObjectId(id)},{"$set":doc})
+
+    return redirect('http://localhost:5001/mypage')
+
+# 삭제
+@board.route('/board/delete', methods=["GET"])
+def board_delete_get():
+    return "게시판 삭제"

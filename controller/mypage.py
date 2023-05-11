@@ -32,6 +32,7 @@ def my_page_route():
                 'text': a['text'],
                 'images': a['images'],
                 'author': a['author'],
+                'create_day': a['create_day'],
                 'count': count,
             }
             count = count+1

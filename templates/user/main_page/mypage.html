@@ -77,6 +77,23 @@
               <div class="portfolio-caption">
                 <div class="portfolio-caption-heading">{{a['title']}}</div>
               </div>
+              <form name="update-form" method="POST" action="/board/update">
+                <input
+                  class="hidden"
+                  type="text"
+                  id="board-title"
+                  name="board-title"
+                  value="{{a['title']}}"
+                />
+                <input
+                  class="hidden"
+                  type="text"
+                  id="board-date"
+                  name="board-date"
+                  value="{{a['create_day']}}"
+                />
+                <button type="submit">수정</button>
+              </form>
             </div>
           </div>
           {% endfor %}
