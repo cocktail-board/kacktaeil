@@ -16,15 +16,15 @@ function login() {
     processData: false,
     success: function (data) {
       console.log("성공");
-      const check = data["result"];
-      if (check !== "success") {
-        alert("로그인 실패");
-        window.location.reload();
-      }
-      if (check === "success") {
-        alert("로그인 성공");
-        window.location.replace("/index");
-      }
+      // const check = data["result"];
+      // if (check !== "success") {
+      //   alert("로그인 실패");
+      //   window.location.reload();
+      // }
+      // if (check === "success") {
+      //   alert("로그인 성공");
+      //   window.location.replace("/index");
+      // }
     },
     error: function (req, status, error) {
       console.log("ajax 에러임");

@@ -126,15 +126,19 @@ def board_update_finish():
         'text': text,
         'images': img_url,
         'author': author, 
-        'update_day': update_date,
+        'update_day': str(update_date),
     }
     
 
     db.board.update_one({"_id":ObjectId(id)},{"$set":doc})
 
-    return redirect('http://localhost:5001/mypage')
+    return redirect(url_for('my_page.my_page_route'))
 
 # 삭제
-@board.route('/board/delete', methods=["GET"])
+@board.route('/board/delete', methods=["POST"])
 def board_delete_get():
-    return "게시판 삭제"
+    board_date = request.form['board-date']
+
+    db.board.delete_one({"create_day": board_date})
+
+    return redirect(url_for('my_page.my_page_route'))

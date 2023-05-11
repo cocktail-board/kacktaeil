@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, session
+from flask import Blueprint, render_template, request, jsonify, session, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import certifi
@@ -24,7 +24,7 @@ def postLogin():
     # print(find_user)
     # print(session['id'])
     if find_user:
-        return jsonify({"result":"success"})
+        return redirect(url_for('board.board_list'))
 
 @login.route("/api/logout", methods=["POST"])
 def login_route():

@@ -94,6 +94,16 @@
                 />
                 <button type="submit">수정</button>
               </form>
+              <form action="/board/delete" method="POST">
+                <input
+                  class="hidden"
+                  type="text"
+                  id="board-date"
+                  name="board-date"
+                  value="{{a['create_day']}}"
+                />
+                <button type="submit">삭제</button>
+              </form>
             </div>
           </div>
           {% endfor %}
