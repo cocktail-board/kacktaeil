@@ -64,22 +64,7 @@ def board_create_post():
 
     db.board.insert_one(doc)
 
-    result = list()
-    kacktail_list = list(db.board.find({},{'_id':False}))
-
-    count = 1
-
-    for a in kacktail_list:
-        doc = {
-            'title': a['title'],
-            'text': a['text'],
-            'images': a['images'],
-            'author': a['author'],
-            'count': count,
-        }
-        count = count+1
-        result.append(doc)
-    return render_template('user/main_page/index.html',kacktail_list = result)
+    return redirect(url_for('board.board_list'))
 
 
 # 수정 버튼 누를시
