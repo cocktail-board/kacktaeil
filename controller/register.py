@@ -1,10 +1,13 @@
 from flask import Flask,Blueprint, render_template, request
 import datetime as dt   
 from pymongo import MongoClient   
+import certifi
 register = Blueprint('register', __name__)
 
+ca = certifi.where()
+
 app = Flask(__name__)
-client = MongoClient('mongodb+srv://gmakin36:vcAhbtS2O3CsZFxC@cocktail-cluster.zgihll4.mongodb.net/?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://gmakin36:vcAhbtS2O3CsZFxC@cocktail-cluster.zgihll4.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.kacktail
 
 @register.route('/api/signup', methods=["POST"])
