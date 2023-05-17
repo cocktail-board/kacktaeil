@@ -30,4 +30,4 @@ def postLogin():
 def login_route():
     session.clear()
     message = '로그아웃 되었습니다.'
-    return render_template('/user/index.html', message = message)
+    return redirect(url_for('main.main_get'), message = message)
